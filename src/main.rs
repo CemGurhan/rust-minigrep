@@ -5,13 +5,11 @@ use minigrep::Config;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let config = Config::build(&args).unwrap_or_else(|err| {
-        println!("Error parsing inputs: {err}");
+    let config = Config::build(&args).unwrap_or_else(|_| {
         process::exit(1);
     });
 
-    if let Err(e) = minigrep::run(config) {
-        println!("Application error: {e}");
+    if let Err(_) = minigrep::run(config) {
         process::exit(1);
     }
 }
